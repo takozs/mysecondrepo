@@ -4,56 +4,102 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication8
+namespace ConsoleApplication1
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Random r= new Random();
-            int szam = r.Next(1,1001);
-            int szam1 = 0;
-            int szam2 = 0;
-            int szam3 = 0;
-            int szam4 = 0;
-            int szam5 = 0;
+            Console.Clear();
+            Console.WriteLine("Kitalálós 2.0");
+
+            //Nevek bekérése
+            Console.WriteLine("Kérem az első játékos nevét!");
+            string nev1 = Console.ReadLine();
+
+            Console.WriteLine("Kérem a második játékos nevét!");
+            string nev2 = Console.ReadLine();
+
+            int nev1pont;
+            int nev2pont;
+            int korszam = 0;
+            do
+            {
+                korszam++;
+                Console.WriteLine("Körszám: {0}", korszam);
+                //Random szám generálása
+                Random rnd = new Random();
+                int veletlenszam = rnd.Next(1, 1001);
+                //Console.WriteLine(veletlenszam);
+
+                //Tippek megadása
+                Console.WriteLine("Kérem az első játékos tippjét!");
+                int nev1tipp = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("Kérem a második játékos tippjét!");
+                int nev2tipp = Convert.ToInt32(Console.ReadLine());
+
+                //Tippek kiírása
+
+                if (nev1tipp == nev2tipp)
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine("Döntetlen");
+                }
+                else
+                {
+                    if (nev1tipp < veletlenszam)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("A(z) {0} játékosnak {1} -el tippelt kevesebbet", nev1, veletlenszam - nev1tipp);
+                    }
+                    else if (veletlenszam < nev1tipp)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("A(z) {0} játékosnak {1} -el tippelt többet", nev1, nev1tipp - veletlenszam);
+                    }
 
 
-            Console.WriteLine("Az gép által gondolt szám a(z) {0}. Kissebb(>), nagyobb(<) vagy egyenlő(=) amire ön gondolt?", szam);
+                    if (nev2tipp < veletlenszam)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("A(z) {0} játékosnak {1} -el tippelt kevesebbet", nev2, veletlenszam - nev2tipp);
+                    }
+                    else if (veletlenszam < nev2tipp)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("A(z) {0} játékosnak {1} -el tippelt többet", nev2, nev2tipp - veletlenszam);
+                    }
+                }
+                Console.ForegroundColor = ConsoleColor.Gray;
+                int nev1kulonbseg = veletlenszam - nev1tipp;
+                int nev2kulonbseg = veletlenszam - nev2tipp;
+                 nev1pont = 0;
+                 nev2pont = 0;
+                if (nev1kulonbseg < nev2kulonbseg)
+                {
+                    Console.WriteLine("{0} játékos nyert ebben a körben.", nev2);
+                    nev2pont++;
 
-            string valasz1 = Console.ReadLine();
-            if (valasz1 == "=") Console.WriteLine("Hohó, nagyon ügyes gép vagyok!");
-            else if (valasz1 == ">") szam1 = r.Next(1, szam);
-            else if (valasz1 == "<") szam1 = r.Next(szam, 1001);
+                }
+                else if (nev2kulonbseg < nev1kulonbseg)
+                {
+                    Console.WriteLine("{0} játékos nyert ebben a körben.", nev1);
+                    nev1pont++;
+                }
+                else
+                {
+                    Console.WriteLine("Döntetlen");
+                }
 
+                Console.WriteLine("A {0} játékosnak {1} pontja van.", nev1, nev1pont);
+                Console.WriteLine("A {0} játékosnak {1} pontja van.", nev2, nev2pont);
 
-            Console.WriteLine("Akkor erre a számra gondoltam: {0}. Kissebb(<), nagyobb(>) vagy egyenlő(=) amire ön gondolt?", szam1);
+            } while (korszam <= 10);
 
-             string valasz2 = Console.ReadLine();
-            if (valasz2 == "=") Console.WriteLine("Hohó, nagyon ügyes gép vagyok!");
-            else if (valasz2 == ">") szam2 = r.Next(szam, szam1);
-            else if (valasz2 == "<") szam2 = r.Next(szam1, szam);
-            Console.WriteLine(szam2);
-
-            Console.WriteLine("Akkor erre a számra gondoltam: {0}. Kissebb(<), nagyobb(>) vagy egyenlő(=) amire ön gondolt?", szam2);
-
-            string valasz3 = Console.ReadLine();
-            if (valasz3 == "=") Console.WriteLine("Hohó, nagyon ügyes gép vagyok!");
-            else if (valasz3 == ">") szam3 = r.Next(szam1, szam2);
-            else if (valasz3 == "<") szam3 = r.Next(szam2, szam1);
-            Console.WriteLine(szam4);
-
-            Console.WriteLine("Akkor erre a számra gondoltam: {0}. Kissebb(<), nagyobb(>) vagy egyenlő(=) amire ön gondolt?", szam3);
-
-            string valasz4 = Console.ReadLine();
-            if (valasz4 == "=") Console.WriteLine("Hohó, nagyon ügyes gép vagyok!");
-            else if (valasz4 == ">") szam4 = r.Next(szam2, szam3);
-            else if (valasz4 == "<") szam4 = r.Next(szam3, szam2);
-            Console.WriteLine(szam4);
-
-
-
-
+            if (nev1pont < nev2pont)
+            { Console.WriteLine("{0} játékos nyert.", nev2); }
+            else { Console.WriteLine("{0} játékos nyert.", nev1); }
 
             Console.ReadKey();
         }
