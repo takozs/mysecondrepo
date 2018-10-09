@@ -1,0 +1,95 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+           //Valamennyi szám és páros vagy páratlan
+            Console.WriteLine("Hány számot fogsz megadni?");
+            int db = Convert.ToInt32(Console.ReadLine());
+            //int[] szam = new int[db];
+
+            //for (int i = 0; i < db; i++)
+            //{
+            //    Console.Write("Kérem írja be a(z) {0}. számot!", i+1);
+                
+            //    szam[i] = Convert.ToInt32(Console.ReadLine());
+                
+            //}
+            
+
+        
+            int[] szam = new int[db];
+            Random r = new Random();
+            Console.Write("A generált számok: ");
+            for (int i = 0; i < db; i++)
+
+            {
+                szam[i] = r.Next(1, db);
+                
+                //Console.Write(szam[i] + ";");
+          }
+            Console.WriteLine("\b \n----------------------------------------");
+
+            int szumma = 0;
+            for (int i = 0; i < db; i++)
+            {
+               szumma = szumma + szam[i];
+            }
+            Console.WriteLine("{0} a generált számok összege.", szumma);
+            Console.WriteLine("----------------------------------------");
+
+            Console.WriteLine("{0} a számok átlaga.", (double)szumma/db);
+            Console.WriteLine("----------------------------------------");
+
+            int tiznelkissebb = 0;
+            for (int i = 0; i < db; i++)
+            {
+              if (szam[i]<10)
+              { tiznelkissebb++; }
+            }
+            Console.WriteLine("{0} darab 10-nél kissebb szám van.", tiznelkissebb);
+            Console.WriteLine("----------------------------------------");
+
+            int legkissebb = szam[0];
+            for (int i = 1; i < db; i++)
+            {
+                if (szam[i] < legkissebb) { legkissebb = szam[i]; }
+
+            }
+            Console.WriteLine("a {0} darab szám közül a(z) {1} a legkissebb.", db, legkissebb);
+            Console.WriteLine("----------------------------------------");
+
+            int legnagyobb = szam[0];
+            for (int i = 1; i < db; i++)
+            {
+                if (szam[i] > legnagyobb) { legnagyobb = szam[i]; }
+
+            }
+            Console.WriteLine("a {0} darab szám közül a(z) {1} a legnagyobb.", db, legnagyobb);
+            Console.WriteLine("----------------------------------------");
+
+            int paros = 0;
+            int paratlan = 0;
+            for (int i = 0; i < db; i++)
+
+            {
+                if (szam[i] % 2 == 0)
+                {
+                    paros++;
+                }
+                else { paratlan++; }
+            }
+            Console.WriteLine("{0} páros szám volt köztük.", paros);
+            Console.WriteLine("{0} páratlan szám volt köztük.", paratlan);
+
+            Console.ReadKey();
+        }
+    }
+}
