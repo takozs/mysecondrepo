@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Tömbök létrehozása
+            string[] ezres = {"", "M", "MM", "MMM",};
+            string[] szazas = { "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM",};
+            string[] tizes = { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC", };
+            string[] egyes = { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", };
+
+            //Szám bekérése
+            int szam;
+            do
+            {
+                Console.WriteLine("Adjon meg egy számot!(1-3999)");
+                szam = Convert.ToInt32(Console.ReadLine());
+                if (szam > 3999) {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("A gép berobban...3...2...1 - BUMM!");
+                }
+                Console.ForegroundColor = ConsoleColor.Gray;
+            } while (szam > 3999 || szam < 1);
+            
+            //Ezresek átalakítása
+            int ezresek = szam / 1000;
+            Console.WriteLine("Az ezeresek száma: {0}", ezresek);
+            //Százasok átalakítása
+            int szazasok = szam / 100 - ezresek * 10;
+            Console.WriteLine("A százasok száma: {0}", szazasok);
+            //Tizesek átalakítása
+            int tizesek = szam / 10 - ezresek * 100 - szazasok * 10;
+            Console.WriteLine("A tizesek száma: {0}", tizesek);
+            //Egyesek átalakítása
+            int egyesek = szam - ezresek * 1000 - szazasok * 100 - tizesek * 10;
+            Console.WriteLine("Az egyesek száma: {0}", egyesek);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("A szám római számként: ");
+            //Átalakítás
+            Console.Write(ezres[ezresek] + szazas[szazasok] + tizes[tizesek] + egyes[egyesek]);
+
+
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("\n A kilépéshez nyomjon meg egy gombot...");
+            Console.ReadKey();
+        }
+    }
+}
