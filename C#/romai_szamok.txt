@@ -1,0 +1,102 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Szám bekérése
+            int szam;
+            do
+            {
+                Console.WriteLine("Adjon meg egy számot!(1-3999)");
+                szam = Convert.ToInt32(Console.ReadLine());
+                if (szam > 3999) {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("A gép berobban...3...2...1 - BUMM!");
+                }
+                Console.ForegroundColor = ConsoleColor.Gray;
+            } while (szam > 3999 || szam < 1);
+            
+            //Ezresek átalakítása
+            int ezres = szam / 1000;
+            Console.WriteLine("Az ezeresek száma: {0}", ezres);
+            //Százasok átalakítása
+            int szazas = szam / 100 - ezres * 10;
+            Console.WriteLine("A százasok száma: {0}", szazas);
+            //Tizesek átalakítása
+            int tizes = szam / 10 - ezres * 100 - szazas * 10;
+            Console.WriteLine("A tizesek száma: {0}", tizes);
+            //Egyesek átalakítása
+            int egyes = szam - ezres * 1000 - szazas * 100 - tizes * 10;
+            Console.WriteLine("Az egyesek száma: {0}", egyes);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("A szám római számként: ");
+
+            switch (ezres)
+            {
+                case 1: Console.Write("M"); break;
+                case 2: Console.Write("MM"); break;
+                case 3: Console.Write("MMM"); break;
+                case 4: Console.Write("MMMM"); break;
+                default: Console.Write("Húh az nagyon nagy!"); break;
+
+            }
+
+            switch (szazas)
+            {
+                case 1: Console.Write("C"); break;
+                case 2: Console.Write("CC"); break;
+                case 3: Console.Write("CCC"); break;
+                case 4: Console.Write("CD"); break;
+                case 5: Console.Write("D"); break;
+                case 6: Console.Write("DC"); break;
+                case 7: Console.Write("DCC"); break;
+                case 8: Console.Write("DCCC"); break;
+                case 9: Console.Write("CM"); break;
+                
+
+            }
+
+            switch (tizes)
+            {
+                case 1: Console.Write("X"); break;
+                case 2: Console.Write("XX"); break;
+                case 3: Console.Write("XXX"); break;
+                case 4: Console.Write("XL"); break;
+                case 5: Console.Write("L"); break;
+                case 6: Console.Write("LX"); break;
+                case 7: Console.Write("LXX"); break;
+                case 8: Console.Write("LXXX"); break;
+                case 9: Console.Write("XC"); break;
+                
+
+            }
+
+            switch (egyes)
+            {
+                case 1: Console.Write("I"); break;
+                case 2: Console.Write("II"); break;
+                case 3: Console.Write("III"); break;
+                case 4: Console.Write("IV"); break;
+                case 5: Console.Write("V"); break;
+                case 6: Console.Write("VI"); break;
+                case 7: Console.Write("VII"); break;
+                case 8: Console.Write("VIII"); break;
+                case 9: Console.Write("IX"); break;
+                
+
+            }
+
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("\n A kilépéshez nyomjon meg egy gombot...");
+            Console.ReadKey();
+        }
+    }
+}
