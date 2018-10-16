@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static bool Vane(int[] tomb, int szam)
+        {
+            int hanyszor = 0;
+            bool van = false;
+            for (int i = 0; i < tomb.Length; i++)
+            {
+                if (tomb[i] == szam) hanyszor++;
+            }
+            if (hanyszor == 1) return false;
+            else return true;
+        }
+        static void Main(string[] args)
+        {
+
+            int max = 1;
+            int db;
+            int valasz;
+            Random r = new Random();
+            
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("Adja meg a lottó típusát!(5,6,7)");
+                valasz = Convert.ToInt32(Console.ReadLine());
+
+                if (valasz > 7 || valasz < 5) {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Rossz az érték!");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine("Nyomnjon egy gombot a folytatáshoz...");
+                    Console.ReadKey();
+                }
+            } 
+            while (valasz > 7 || valasz < 5);
+
+            switch (valasz)
+            {
+                case 5: db = 5; max = 90; break;
+                case 6: db = 6; max = 45; break;
+                default: db = 7; max = 35; break;
+            }
+            int[] kihuzottak = new int[db];
+            for (int i = 0; i < db; i++)
+            {
+                do
+                {
+                    kihuzottak[i] = r.Next(1, max + 1); 
+                } while (Vane(kihuzottak,kihuzottak[i]));
+                 Console.WriteLine("A {0}-dik nyerõszám a(z) {1}.",i+1, kihuzottak[i] );
+
+            }
+           
+            Console.ReadKey();
+        }
+    }
+}
