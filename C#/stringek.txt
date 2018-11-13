@@ -1,0 +1,34 @@
+using System;
+    class Program
+    {
+        static void Main()
+        {
+            string szoveg = "UMSZKI egy jó iskola!";
+            string nagybetus = szoveg.ToUpper();
+            string kisbetus = szoveg.ToLower();
+            bool vane = szoveg.Contains("UMSZKI");
+            int hossz = szoveg.Length;
+            int hanyadik = szoveg.IndexOf("jó");
+            string ujszoveg = szoveg.Insert(6, " nem");
+            string tisztitott = szoveg.Remove(6, 15);
+            string resz = szoveg.Substring(0,6);
+            string csere = szoveg.Replace("UMSZKI", "Toldi");
+            string kivesz = szoveg.Trim(' ');
+            string[] szetvalaszt = szoveg.Split(' ');
+           //kiirasok
+            Console.WriteLine(szoveg);
+            Console.WriteLine(nagybetus);
+            Console.WriteLine(kisbetus);
+            Console.WriteLine(hossz);
+            if (vane == true) Console.WriteLine("Szerepel a szovegben az UMSZKI."); else Console.WriteLine("Nem szerepel az UMSZKI.");
+            Console.WriteLine("A szovegben a {0}. karaktertol szerepel a szovegben a 'jó'.", hanyadik);
+            Console.WriteLine(ujszoveg);
+            Console.WriteLine(tisztitott);
+            Console.WriteLine(resz);
+            Console.WriteLine(csere);
+            Console.WriteLine(kivesz);
+            for (int i = 0; i < szetvalaszt.Length; i++){Console.WriteLine(szetvalaszt[i]);}
+            Console.ReadKey();
+        }
+
+    }
