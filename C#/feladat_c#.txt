@@ -1,0 +1,72 @@
+using System;
+using System.IO;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            StreamReader file = new StreamReader(@"C:\Users\Tanuló\Desktop\szinesz.txt");
+            string[] nev = new string[500];
+            int[] nem = new int[500];
+            string[] szulido = new string[500];
+            string[] szulhely = new string[500];
+            string[] szulorsz = new string[500];
+            int[] filmszam = new int[500];
+            int o = 0;
+            file.ReadLine();
+            
+
+            while (!file.EndOfStream)
+            {
+                string sor = file.ReadLine();
+                string[] tagolt = sor.Split('\t');
+                nev[o] = tagolt[0];
+                nem[o] = Convert.ToInt32(tagolt[1]);
+                szulido[o] = tagolt[2];
+                szulhely[o] = tagolt[3];
+                szulorsz[o] = tagolt[4];
+                filmszam[o] = Convert.ToInt32(tagolt[5]);
+                o++;
+            }
+            Console.WriteLine("Az adatok beolvasásra kerültek, összesen {0} sor.", o);
+            
+            //1. Hány férfi és hány nõ adatai szerepeltek a fájlban?
+            int ferfi = 0;
+            int no = 0;
+
+            for (int i = 0; i < o; i++)
+            {
+                if (nem[i] == 1) ferfi++;
+                else if (nem[i] == 0) no++;
+            }
+            Console.WriteLine("{0} nõ és {1} férfi szerepel az adatokban.", no, ferfi);
+
+            //2. Milyen nemzetiségû volt Clint Eastwood?
+
+            for (int i = 0; i < o; i++)
+            {
+                if (nev[i] == "Eastwood, Clint") Console.WriteLine("Clint Eastwood {0} nemzetiségû.", szulorsz[i]);
+            }
+
+            //3. Listázza ki a magyar színésznõk nevét!
+
+            for (int i = 0; i< o; i++)
+            {
+                if (nem[i] == 0 && szulorsz[i] == "Magyarország") Console.WriteLine("{0} színésznõ magyar volt.", nev[i]);
+            }
+
+            //4. Hány filmszerep köthetõ a magyarok nevéhez összesen?
+
+            int magyarszerep = 0;
+            for (int i = 0; i < o; i++)
+            {
+                if (szulorsz[i] == "Magyarország") magyarszerep = magyarszerep + filmszam[i];
+            }
+
+            Console.WriteLine("Összesen {0} filmszerep köthetõ a magyarok nevéhez összesen.", magyarszerep);
+            Console.ReadKey();
+        }
+    }
+}
